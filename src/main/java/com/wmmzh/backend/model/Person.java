@@ -1,5 +1,7 @@
 package com.wmmzh.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDate;
 
 public class Person {
@@ -9,6 +11,7 @@ public class Person {
     private String nachname;
     private String versichertennummer;
     private String svnr;
+    @JsonFormat(pattern="dd.MM.yyyy")
     private LocalDate geburtsdatum;
     private Adresse adresse;
 

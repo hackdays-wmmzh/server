@@ -5,6 +5,7 @@ import com.wmmzh.backend.model.Person;
 import com.wmmzh.backend.service.PersonService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 @Service
@@ -18,6 +19,7 @@ public class PersonServiceImpl implements PersonService {
         person.setNachname("Heeb");
         person.setVersichertennummer("123.456.789");
         person.setSvnr("756.000.000.000.1");
+        person.setGeburtsdatum(LocalDate.of(1980, 05,27));
 
         Adresse adresse = new Adresse();
         adresse.setStrasse("Kaiserweg 97");
