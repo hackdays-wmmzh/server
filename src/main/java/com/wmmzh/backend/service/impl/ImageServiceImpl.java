@@ -20,7 +20,7 @@ public class ImageServiceImpl implements ImageService {
     private PersonRepository personRepo;
     private ImageRepository imageRepo;
 
-    private static final List<String> allowedTags = Arrays.asList("papier", "dokument", "rechung", "text", "buch");
+    private static final List<String> allowedTags = Arrays.asList("papier", "dokument", "rechung", "text", "buch", "schreiben", "währung", "gewinn", "text");
 
     public ImageServiceImpl(ImaggaClient imaggaClient, OcrClient ocrClient, PersonRepository personRepo, ImageRepository imageRepo) {
         this.imaggaClient = imaggaClient;
@@ -34,17 +34,23 @@ public class ImageServiceImpl implements ImageService {
         Person person = personRepo.getById(personId).orElseThrow(() -> new IllegalArgumentException("Person '" + personId + "' does not exist!"));
 
         try {
-            String imageTag = imaggaClient.getImageInfo(image.getContent());
-
-            if (!allowedTags.contains(imageTag.toLowerCase())) {
-                throw new IllegalStateException("Only pictures of documents allowed!");
-            }
+            isImageTagAllowed(image);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
         image.setPerson(person);
         imageRepo.save(image);
+    }
+
+    private void isImageTagAllowed(Image image) throws IOException {
+        for (String imageTag : imaggaClient.getImageInfo(image.getContent())) {
+            if (allowedTags.contains(imageTag.toLowerCase())) {
+                break;
+            }
+
+            throw new IllegalStateException("Only pictures of documents allowed! Image was of " + imageTag);
+        }
     }
 
     @Override

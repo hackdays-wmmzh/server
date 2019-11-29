@@ -4,12 +4,15 @@ import com.google.gson.Gson;
 import kong.unirest.HttpResponse;
 import kong.unirest.JsonNode;
 import kong.unirest.Unirest;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.Base64;
+import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ImaggaClientImpl implements ImaggaClient {
@@ -17,11 +20,8 @@ public class ImaggaClientImpl implements ImaggaClient {
     private String API_KEY = "acc_926234adbb1966e";;
     private final String KEY_SEPARATOR = ":";
 
-    @Value("${rijad.test}")
-    private String base64Image;
-
     @Override
-    public String getImageInfo(String base64Images) {
+    public List<String> getImageInfo(String base64Image) {
         String credentialsToEncode = API_KEY + KEY_SEPARATOR + DEVELOPER_KEY;
         String basicAuth = Base64.getEncoder().encodeToString(credentialsToEncode.getBytes(StandardCharsets.UTF_8));
 
@@ -33,14 +33,16 @@ public class ImaggaClientImpl implements ImaggaClient {
                 .asJson();
 
         if (!response.isSuccess()) {
-            return response.toString();
+            return Collections.singletonList(response.toString());
         }
 
         Gson gson = new Gson();
         ImaggaModel orcModel =  gson.fromJson(response.getBody().toString(), ImaggaModel.class);
 
         return orcModel.getResult().getTags().stream()
-                .max(Comparator.comparing(ImaggaModel.Tag::getConfidence))
-                .map(t -> t.getTag().getDe()).orElse("Nichts");
+                .sorted(Comparator.comparing(ImaggaModel.Tag::getConfidence))
+                .limit(5)
+                .map(t -> t.getTag().getDe())
+                .collect(Collectors.toList());
     }
 }

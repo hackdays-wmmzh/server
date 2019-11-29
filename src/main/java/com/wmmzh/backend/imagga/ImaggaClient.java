@@ -1,7 +1,8 @@
 package com.wmmzh.backend.imagga;
 
 import java.io.IOException;
+import java.util.List;
 
 public interface ImaggaClient {
-    String getImageInfo(String base64Images) throws IOException;
+    List<String> getImageInfo(String base64Images) throws IOException;
 }
