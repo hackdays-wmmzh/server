@@ -1,14 +1,15 @@
 package com.wmmzh.backend.repository;
 
+import com.wmmzh.backend.model.Image;
 import com.wmmzh.backend.model.Person;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
+import java.util.List;
 
 @Repository
-public interface PersonRepository extends JpaRepository<Person, Long> {
+public interface ImageRepository extends JpaRepository<Image, Long> {
 
-    Optional<Person> getById(long id);
+    List<Image> getAllByPerson(Long person);
 
 }

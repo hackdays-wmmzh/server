@@ -2,9 +2,20 @@ package com.wmmzh.backend.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import java.time.LocalDate;
+import java.util.Objects;
 
+@Entity
 public class Person {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String email;
     private String vorname;
@@ -13,6 +24,7 @@ public class Person {
     private String svnr;
     @JsonFormat(pattern="dd.MM.yyyy")
     private LocalDate geburtsdatum;
+    @OneToOne
     private Adresse adresse;
 
     public String getEmail() {
@@ -69,6 +81,19 @@ public class Person {
 
     public void setAdresse(Adresse adresse) {
         this.adresse = adresse;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return Objects.equals(id, person.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
 }
