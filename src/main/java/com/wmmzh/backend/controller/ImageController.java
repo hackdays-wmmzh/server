@@ -10,14 +10,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
 @RequestMapping("/persons/{personId}/images")
 public class ImageController {
 
-    @Autowired
-    private ImageService imageService;
+    private final ImageService imageService;
+
+    public ImageController(ImageService imageService) {
+        this.imageService = imageService;
+    }
 
     @PostMapping
     public void post(@PathVariable Long personId, @RequestBody Image image) {
@@ -28,5 +32,4 @@ public class ImageController {
     public List<Image> getAll(@PathVariable Long personId) {
         return imageService.getAll(personId);
     }
-
 }
