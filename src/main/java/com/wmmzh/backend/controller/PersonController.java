@@ -2,7 +2,6 @@ package com.wmmzh.backend.controller;
 
 import com.wmmzh.backend.model.Person;
 import com.wmmzh.backend.service.PersonService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,8 +14,11 @@ import java.util.Optional;
 @RequestMapping("/persons")
 public class PersonController {
 
-    @Autowired
-    private PersonService personService;
+    private final PersonService personService;
+
+    public PersonController(PersonService personService) {
+        this.personService = personService;
+    }
 
     @GetMapping
     public List<Person> getAll() {
@@ -27,5 +29,4 @@ public class PersonController {
     public Optional<Person> getById(@PathVariable Long id) {
         return personService.getById(id);
     }
-
 }

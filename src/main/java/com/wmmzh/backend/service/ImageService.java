@@ -6,4 +6,5 @@ public interface ImageService {
 
     void add(long personId, Image image);
 
+    String getTextFromImage(String base64);
 }
