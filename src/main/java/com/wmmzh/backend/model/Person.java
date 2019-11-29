@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -29,10 +30,13 @@ public class Person {
     private LocalDate geburtsdatum;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Image> images;
+    private List<Image> images = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL)
     private Adresse adresse;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Vertrag> vertraege = new ArrayList<>();
 
     public String getEmail() {
         return email;
@@ -88,6 +92,14 @@ public class Person {
 
     public void setAdresse(Adresse adresse) {
         this.adresse = adresse;
+    }
+
+    public List<Vertrag> getVertraege() {
+        return vertraege;
+    }
+
+    public void setVertraege(List<Vertrag> vertraege) {
+        this.vertraege = vertraege;
     }
 
     @Override
