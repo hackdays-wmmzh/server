@@ -22,18 +22,20 @@ public class ImageServiceImpl implements ImageService {
     private final OcrClient ocrClient;
     private PersonRepository personRepo;
     private ImageRepository imageRepo;
+    private final EreignisService ereignisService;
 
-    private static final List<String> allowedTags = Arrays.asList("papier", "dokument", "rechung", "text", "buch", "schreiben", "währung", "gewinn", "text");
+    private static final List<String> allowedTags = Arrays.asList(
+        "papier", "dokument", "rechung", "text", "buch", "schreiben", "währung", "gewinn", "text",
+        "finanzelles", "markt"
+    );
 
-    public ImageServiceImpl(ImaggaClient imaggaClient, OcrClient ocrClient, PersonRepository personRepo, ImageRepository imageRepo) {
+    public ImageServiceImpl(ImaggaClient imaggaClient, OcrClient ocrClient, PersonRepository personRepo, ImageRepository imageRepo, EreignisService ereignisService) {
         this.imaggaClient = imaggaClient;
         this.ocrClient = ocrClient;
         this.personRepo = personRepo;
         this.imageRepo = imageRepo;
+        this.ereignisService = ereignisService;
     }
-
-    @Autowired
-    private EreignisService ereignisService;
 
     @Override
     public void add(long personId, Image image) {
