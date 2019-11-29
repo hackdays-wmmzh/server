@@ -2,12 +2,15 @@ package com.wmmzh.backend.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -24,7 +27,11 @@ public class Person {
     private String svnr;
     @JsonFormat(pattern="dd.MM.yyyy")
     private LocalDate geburtsdatum;
-    @OneToOne
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Image> images;
+
+    @OneToOne(cascade = CascadeType.ALL)
     private Adresse adresse;
 
     public String getEmail() {
