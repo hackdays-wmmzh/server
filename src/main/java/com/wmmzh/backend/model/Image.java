@@ -1,13 +1,10 @@
 package com.wmmzh.backend.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
 import java.util.Objects;
 
 @Entity
@@ -22,10 +19,6 @@ public class Image {
     /* Base64 Content */
     @Lob
     private String content;
-
-    @JsonIgnore
-    @ManyToOne(targetEntity = Person.class)
-    private Person person;
 
     public Image() {
     }
@@ -52,14 +45,6 @@ public class Image {
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public Person getPerson() {
-        return person;
-    }
-
-    public void setPerson(Person person) {
-        this.person = person;
     }
 
     @Override

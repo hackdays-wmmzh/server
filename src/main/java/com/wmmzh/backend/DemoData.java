@@ -2,6 +2,7 @@ package com.wmmzh.backend;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.wmmzh.backend.model.Ereignis;
 import com.wmmzh.backend.model.Person;
 import com.wmmzh.backend.model.Vertrag;
 import com.wmmzh.backend.repository.PersonRepository;
@@ -10,6 +11,7 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -27,7 +29,7 @@ public class DemoData {
     public void appReady(ApplicationReadyEvent event) {
         try {
             List<Vertrag> vertraege = mapVertraege(readVertraege());
-            List<Person> persons = insertPersons(vertraege);
+            List<Person> persons = insertPersons(vertraege, getEreignisse());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -41,7 +43,7 @@ public class DemoData {
         return vertraege;
     }
 
-    private List<Person> insertPersons(List<Vertrag> vertraege) throws JsonProcessingException {
+    private List<Person> insertPersons(List<Vertrag> vertraege, List<Ereignis> ereignisse) throws JsonProcessingException {
         List<Person> persons = new ArrayList<>();
         int counter = 0;
         for (String personStr : readPersons()) {
@@ -56,6 +58,20 @@ public class DemoData {
             personRepo.save(person);
         }
         return persons;
+    }
+
+    private List<Ereignis> getEreignisse() {
+        return Arrays.asList(
+          createEreignis(LocalDateTime.of(2019, 05, 02, 14, 35), Ereignis.Type.POLICE_ERHALTEN, "Police erhalten")
+        );
+    }
+
+    private Ereignis createEreignis(LocalDateTime zeitstempel, Ereignis.Type type, String text) {
+        Ereignis ereignis = new Ereignis();
+        ereignis.setZeitstempel(zeitstempel);
+        ereignis.setType(type);
+        ereignis.setText(text);
+        return ereignis;
     }
 
     private List<String> readPersons() {
