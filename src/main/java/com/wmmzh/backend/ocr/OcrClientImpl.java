@@ -1,10 +1,14 @@
 package com.wmmzh.backend.ocr;
 
+import com.google.gson.Gson;
+import com.wmmzh.backend.imagga.ImaggaModel;
 import kong.unirest.HttpResponse;
 import kong.unirest.JsonNode;
 import kong.unirest.Unirest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import java.util.Comparator;
 
 @Service
 public class OcrClientImpl implements OcrClient {
@@ -22,6 +26,16 @@ public class OcrClientImpl implements OcrClient {
                 .field("language", "ger")
                 .asJson();
 
-        return response.getBody().toPrettyString();
+
+        if (!response.isSuccess()) {
+            return response.toString();
+        }
+
+        Gson gson = new Gson();
+        ImaggaModel orcModel =  gson.fromJson(response.getBody().toString(), ImaggaModel.class);
+
+        return orcModel.getResult().getTags().stream()
+                .max(Comparator.comparing(ImaggaModel.Tag::getConfidence))
+                .map(t -> t.getTag().getDe()).orElse("Nichts");
     }
 }

@@ -1,5 +1,6 @@
 package com.wmmzh.backend.imagga;
 
+import com.google.gson.Gson;
 import kong.unirest.HttpResponse;
 import kong.unirest.JsonNode;
 import kong.unirest.Unirest;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import java.util.Comparator;
 
 @Service
 public class ImaggaClientImpl implements ImaggaClient {
@@ -30,6 +32,15 @@ public class ImaggaClientImpl implements ImaggaClient {
                 .field("language", "de")
                 .asJson();
 
-        return response.getBody().toPrettyString();
+        if (!response.isSuccess()) {
+            return response.toString();
+        }
+
+        Gson gson = new Gson();
+        ImaggaModel orcModel =  gson.fromJson(response.getBody().toString(), ImaggaModel.class);
+
+        return orcModel.getResult().getTags().stream()
+                .max(Comparator.comparing(ImaggaModel.Tag::getConfidence))
+                .map(t -> t.getTag().getDe()).orElse("Nichts");
     }
 }
