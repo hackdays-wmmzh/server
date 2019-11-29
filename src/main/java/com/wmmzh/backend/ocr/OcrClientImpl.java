@@ -19,7 +19,7 @@ public class OcrClientImpl implements OcrClient {
                 .header("apikey", API_KEY)
                 .header("accept", "application/json")
                 .field("base64Image", base64Image)
-                .field("language", "de")
+                .field("language", "ger")
                 .asJson();
 
         return response.getBody().toPrettyString();
