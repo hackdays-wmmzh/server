@@ -5,10 +5,9 @@ import com.wmmzh.backend.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Optional;
+import java.util.List;
 
 @RestController
 @RequestMapping("/persons")
@@ -18,8 +17,8 @@ public class PersonController {
     private PersonService personService;
 
     @GetMapping
-    public Optional<Person> getByEmail(@RequestParam String email) {
-        return personService.getByEmail(email);
+    public List<Person> getAll() {
+        return personService.getAll();
     }
 
 }

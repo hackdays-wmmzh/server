@@ -6,15 +6,17 @@ import com.wmmzh.backend.service.PersonService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class PersonServiceImpl implements PersonService {
 
     @Override
-    public Optional<Person> getByEmail(String email) {
+    public List<Person> getAll() {
         Person person = new Person();
-        person.setEmail(email);
+        person.setEmail("abc@abc.ch");
         person.setVorname("Hans");
         person.setNachname("Heeb");
         person.setVersichertennummer("123.456.789");
@@ -28,7 +30,7 @@ public class PersonServiceImpl implements PersonService {
         adresse.setLand("Schweiz");
         person.setAdresse(adresse);
 
-        return Optional.of(person);
+        return Arrays.asList(person);
     }
 
 }
