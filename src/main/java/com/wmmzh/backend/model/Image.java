@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import java.util.Objects;
 
@@ -16,8 +17,14 @@ public class Image {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String name;
+
+    /* Base64 Content */
+    @Lob
+    private String content;
+
     @JsonIgnore
-    @ManyToOne
+    @ManyToOne(targetEntity = Person.class)
     private Person person;
 
     public Image() {
@@ -30,19 +37,6 @@ public class Image {
     public void setId(Long id) {
         this.id = id;
     }
-
-    public Person getPerson() {
-        return person;
-    }
-
-    public void setPerson(Person person) {
-        this.person = person;
-    }
-
-    private String name;
-
-    /* Base64 Content */
-    private String content;
 
     public String getName() {
         return name;
@@ -58,6 +52,14 @@ public class Image {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
     @Override

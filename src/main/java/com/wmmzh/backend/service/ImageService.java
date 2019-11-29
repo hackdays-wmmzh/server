@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface ImageService {
 
+    void add(long personId, Image image);
+
     List<Image> getAll(@PathVariable Long personId);
 
 }

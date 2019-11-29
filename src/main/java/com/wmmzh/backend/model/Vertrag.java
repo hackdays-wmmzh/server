@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import java.math.BigDecimal;
@@ -16,7 +17,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 @Entity
 public class Vertrag {
@@ -28,7 +28,7 @@ public class Vertrag {
     private String policennummer;
 
     @JsonIgnore
-    @OneToOne
+    @ManyToOne
     private Person person;
 
     @JsonFormat(pattern="dd.MM.yyyy")

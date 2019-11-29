@@ -29,14 +29,17 @@ public class Person {
     @JsonFormat(pattern="dd.MM.yyyy")
     private LocalDate geburtsdatum;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "person")
     private List<Image> images = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL)
     private Adresse adresse;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "person")
     private List<Vertrag> vertraege = new ArrayList<>();
+
+    public Person() {
+    }
 
     public String getEmail() {
         return email;
@@ -84,6 +87,14 @@ public class Person {
 
     public void setGeburtsdatum(LocalDate geburtsdatum) {
         this.geburtsdatum = geburtsdatum;
+    }
+
+    public List<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Image> images) {
+        this.images = images;
     }
 
     public Adresse getAdresse() {
