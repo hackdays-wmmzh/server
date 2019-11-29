@@ -44,13 +44,14 @@ public class ImageServiceImpl implements ImageService {
     }
 
     private void isImageTagAllowed(Image image) throws IOException {
-        for (String imageTag : imaggaClient.getImageInfo(image.getContent())) {
+        List<String> imageTags = imaggaClient.getImageInfo(image.getContent());
+        for (String imageTag : imageTags) {
             if (allowedTags.contains(imageTag.toLowerCase())) {
-                break;
+                return;
             }
-
-            throw new IllegalStateException("Only pictures of documents allowed! Image was of " + imageTag);
         }
+
+        throw new IllegalStateException("Only pictures of documents allowed! Image was one of the following: " + String.join(", ", imageTags));
     }
 
     @Override
