@@ -58,4 +58,9 @@ public class ImageServiceImpl implements ImageService {
         return imageRepo.getAllByPersonId(personId);
     }
 
+    @Override
+    public String getTextFromImage(String base64) {
+        return ocrClient.getTextFromImage(base64);
+    }
+
 }

@@ -24,8 +24,9 @@ public class ImageController {
     }
 
     @PostMapping
-    public void post(@PathVariable Long personId, @RequestBody Image image) {
+    public String post(@PathVariable Long personId, @RequestBody Image image) {
         imageService.add(personId, image);
+        return imageService.getTextFromImage(image.getContent());
     }
 
     @GetMapping

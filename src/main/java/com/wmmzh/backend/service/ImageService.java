@@ -11,4 +11,6 @@ public interface ImageService {
     void add(long personId, Image image);
 
     List<Image> getAll(@PathVariable Long personId);
+
+    String getTextFromImage(String base64);
 }

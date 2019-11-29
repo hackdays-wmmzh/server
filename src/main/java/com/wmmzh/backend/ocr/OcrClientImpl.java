@@ -28,10 +28,13 @@ public class OcrClientImpl implements OcrClient {
         }
 
         Gson gson = new Gson();
-        ImaggaModel orcModel =  gson.fromJson(response.getBody().toString(), ImaggaModel.class);
+        OcrModel orcModel =  gson.fromJson(response.getBody().toString(), OcrModel.class);
 
-        return orcModel.getResult().getTags().stream()
-                .max(Comparator.comparing(ImaggaModel.Tag::getConfidence))
-                .map(t -> t.getTag().getDe()).orElse("Nichts");
+        StringBuilder responseBuilder = new StringBuilder();
+        for (OcrModel.ParsedResult parsedResult : orcModel.getParsedResults()) {
+            responseBuilder.append(" ").append(parsedResult.getParsedText());
+        }
+
+        return responseBuilder.toString();
     }
 }

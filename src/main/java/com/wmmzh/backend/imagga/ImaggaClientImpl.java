@@ -37,9 +37,9 @@ public class ImaggaClientImpl implements ImaggaClient {
         }
 
         Gson gson = new Gson();
-        ImaggaModel orcModel =  gson.fromJson(response.getBody().toString(), ImaggaModel.class);
+        ImaggaModel imaggaModel =  gson.fromJson(response.getBody().toString(), ImaggaModel.class);
 
-        return orcModel.getResult().getTags().stream()
+        return imaggaModel.getResult().getTags().stream()
                 .sorted(Comparator.comparing(ImaggaModel.Tag::getConfidence))
                 .limit(5)
                 .map(t -> t.getTag().getDe())
