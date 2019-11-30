@@ -9,12 +9,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class EreignisServiceImpl implements EreignisService {
 
-    @Autowired
-    private EreignisRepository ereignisRepo;
+    private final EreignisRepository ereignisRepo;
+
+    public EreignisServiceImpl(EreignisRepository ereignisRepo) {
+        this.ereignisRepo = ereignisRepo;
+    }
 
     @Override
     public void createEreignis(Person person, Ereignis.Type type, String text, Image image) {
@@ -27,4 +31,8 @@ public class EreignisServiceImpl implements EreignisService {
         ereignisRepo.save(ereignis);
     }
 
+    @Override
+    public List<Ereignis> getAll() {
+        return ereignisRepo.findAll();
+    }
 }

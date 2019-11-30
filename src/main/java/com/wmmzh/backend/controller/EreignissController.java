@@ -1,7 +1,7 @@
 package com.wmmzh.backend.controller;
 
-import com.wmmzh.backend.model.Image;
-import com.wmmzh.backend.service.ImageService;
+import com.wmmzh.backend.model.Ereignis;
+import com.wmmzh.backend.service.EreignisService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,14 +12,14 @@ import java.util.List;
 @RequestMapping("/activities")
 public class EreignissController {
 
-    private ImageService imgService;
+    private EreignisService ereignisService;
 
-    public EreignissController(ImageService imgService) {
-        this.imgService = imgService;
+    public EreignissController(EreignisService ereignisService) {
+        this.ereignisService = ereignisService;
     }
 
     @GetMapping
-    public List<Image> getAll() {
-        return imgService.getAll();
+    public List<Ereignis> getAll() {
+        return ereignisService.getAll();
     }
 }
