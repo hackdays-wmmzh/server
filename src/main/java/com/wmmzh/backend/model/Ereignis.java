@@ -3,6 +3,7 @@ package com.wmmzh.backend.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -35,7 +36,7 @@ public class Ereignis {
     @Lob
     private String text;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Image image;
 
     public Ereignis() {

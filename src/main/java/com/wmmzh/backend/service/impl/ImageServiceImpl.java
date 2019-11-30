@@ -45,6 +45,7 @@ public class ImageServiceImpl implements ImageService {
         try {
             isImageTagAllowed(image);
         } catch (IOException e) {
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
 
@@ -60,7 +61,10 @@ public class ImageServiceImpl implements ImageService {
             }
         }
 
-        throw new IllegalStateException("Only pictures of documents allowed! Image was one of the following: " + String.join(", ", imageTags));
+        String errorMessage = "Only pictures of documents allowed! Image was one of the following: " + String.join(", ", imageTags);
+        System.err.println(errorMessage);
+        System.out.println(errorMessage);
+        throw new IllegalStateException(errorMessage);
     }
 
     @Override
