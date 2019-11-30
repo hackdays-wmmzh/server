@@ -58,7 +58,7 @@ public class ImageServiceImpl implements ImageService {
             throw new RuntimeException(e);
         }
 
-
+        System.out.println("Saving image");
         imageRepo.save(image);
     }
 
