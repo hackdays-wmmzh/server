@@ -25,8 +25,9 @@ public class ImageServiceImpl implements ImageService {
     private final EreignisService ereignisService;
 
     private static final List<String> allowedTags = Arrays.asList(
-        "papier", "dokument", "rechung", "text", "buch", "schreiben", "währung", "gewinn", "text",
-        "finanzelles", "markt", "textmaker", "erfolg", "grafik", "retro"
+            "papier", "dokument", "rechung", "text", "buch", "schreiben", "währung", "gewinn", "text",
+            "finanzelles", "markt", "textmaker", "erfolg", "grafik", "retro", "linien", "block", "kreative",
+            "geschäft", "maschine", "schule", "digital", "dokuments"
     );
 
     public ImageServiceImpl(ImaggaClient imaggaClient, OcrClient ocrClient, PersonRepository personRepo, ImageRepository imageRepo, EreignisService ereignisService) {
