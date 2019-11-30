@@ -27,7 +27,7 @@ public class OcrClientImpl implements OcrClient {
         Gson gson = new Gson();
         OcrModel orcModel =  gson.fromJson(response.getBody().toString(), OcrModel.class);
 
-        if (orcModel == null) {
+        if (orcModel == null || orcModel.getParsedResults() == null) {
             return "Nichts erkennt";
         }
 
