@@ -27,11 +27,12 @@ public class ImageServiceImpl implements ImageService {
     private static final List<String> allowedTags = Arrays.asList(
             "papier", "dokument", "rechung", "text", "buch", "schreiben", "währung", "gewinn", "text",
             "finanzelles", "markt", "textmaker", "erfolg", "grafik", "retro", "linien", "block", "kreative",
-            "geschäft", "maschine", "schule", "digital", "dokuments", "im menü", "hinweis"
+            "geschäft", "maschine", "schule", "digital", "dokuments", "im menü", "hinweis", "arbeit", "kopie",
+            "struktur"
     );
 
     private static final List<String> catTags = Arrays.asList(
-            "katze", "tabby", "tier"
+            "cat", "tiger cat", "katze", "tabby", "tier", "hauskatze", "housecat"
     );
 
     public ImageServiceImpl(ImaggaClient imaggaClient, OcrClient ocrClient, PersonRepository personRepo, ImageRepository imageRepo, EreignisService ereignisService) {
