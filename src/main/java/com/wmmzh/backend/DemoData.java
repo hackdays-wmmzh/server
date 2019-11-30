@@ -132,7 +132,7 @@ public class DemoData {
                         "    \"grundversicherung\": {\n" +
                         "        \"name\": \"Home Med Simplx Basis\",\n" +
                         "        \"beschreibung\": \"OKP Hausarztmodell\",\n" +
-                        "        \"pramie\": \"298.70\",\n" +
+                        "        \"praemie\": \"298.70\",\n" +
                         "        \"franchise\": {\n" +
                         "            \"gesamt\": \"1500\",\n" +
                         "            \"bezahlt\": \"200\",\n" +
@@ -147,19 +147,19 @@ public class DemoData {
                         "        {\n" +
                         "            \"name\": \"Travel World\",\n" +
                         "            \"beschreibung\": \"Reiseversicherung\",\n" +
-                        "            \"pramie\": \"12.60\"\n" +
+                        "            \"praemie\": \"12.60\"\n" +
                         "        },\n" +
                         "        {\n" +
                         "            \"name\": \"Denat Tutti\",\n" +
                         "            \"beschreibung\": \"Zahnzusatz\",\n" +
-                        "            \"pramie\": \"35.90\"\n" +
+                        "            \"praemie\": \"35.90\"\n" +
                         "        }\n" +
                         "    ],\n" +
                         "    \"spitalversicheurngen\": [\n" +
                         "        {\n" +
                         "            \"name\": \"Travel World\",\n" +
                         "            \"beschreibung\": \"Reiseversicherung\",\n" +
-                        "            \"pramie\": \"18.50\"\n" +
+                        "            \"praemie\": \"18.50\"\n" +
                         "        }\n" +
                         "    ]\n" +
                         "}\n",
@@ -173,7 +173,7 @@ public class DemoData {
                         "    \"grundversicherung\": {\n" +
                         "        \"name\": \"Simplx Telmed Eco\",\n" +
                         "        \"beschreibung\": \"OKP Telemedizin\",\n" +
-                        "        \"pramie\": \"190.20\",\n" +
+                        "        \"praemie\": \"190.20\",\n" +
                         "        \"franchise\": {\n" +
                         "            \"gesamt\": \"2500\",\n" +
                         "            \"bezahlt\": \"850\",\n" +
@@ -188,7 +188,7 @@ public class DemoData {
                         "        {\n" +
                         "            \"name\": \"Animal Protect\",\n" +
                         "            \"beschreibung\": \"Hunde Rechtsschutzversicherung\",\n" +
-                        "            \"pramie\": \"31.90\"\n" +
+                        "            \"praemie\": \"31.90\"\n" +
                         "        }\n" +
                         "    ]\n" +
                         "}\n",
@@ -202,7 +202,7 @@ public class DemoData {
                         "    \"grundversicherung\": {\n" +
                         "        \"name\": \"Simplx Deluxe All\",\n" +
                         "        \"beschreibung\": \"OKP Grundversichung\",\n" +
-                        "        \"pramie\": \"420.60\",\n" +
+                        "        \"praemie\": \"420.60\",\n" +
                         "        \"franchise\": {\n" +
                         "            \"gesamt\": \"500\",\n" +
                         "            \"bezahlt\": \"380\",\n" +
@@ -217,12 +217,12 @@ public class DemoData {
                         "        {\n" +
                         "            \"name\": \"Avengers Accident\",\n" +
                         "            \"beschreibung\": \"Superhelden Unfall\",\n" +
-                        "            \"pramie\": \"42.30\"\n" +
+                        "            \"praemie\": \"42.30\"\n" +
                         "        },\n" +
                         "        {\n" +
                         "            \"name\": \"Protection Plus\",\n" +
                         "            \"beschreibung\": \"Rechtsschutz\",\n" +
-                        "            \"pramie\": \"88.50\"\n" +
+                        "            \"praemie\": \"88.50\"\n" +
                         "        }\n" +
                         "    ]\n" +
                         "}"

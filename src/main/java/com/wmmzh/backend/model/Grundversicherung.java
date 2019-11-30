@@ -20,6 +20,9 @@ public class Grundversicherung extends Produkt {
     @OneToOne(cascade = CascadeType.ALL)
     private Franchise franchise;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private Selbstbehalt selbstbehalt;
+
     @JsonIgnore
     @OneToOne
     private Person person;
@@ -67,4 +70,11 @@ public class Grundversicherung extends Produkt {
         return Objects.hash(super.hashCode(), id);
     }
 
+    public Selbstbehalt getSelbstbehalt() {
+        return selbstbehalt;
+    }
+
+    public void setSelbstbehalt(Selbstbehalt selbstbehalt) {
+        this.selbstbehalt = selbstbehalt;
+    }
 }

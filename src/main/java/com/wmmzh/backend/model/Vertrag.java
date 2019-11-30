@@ -27,6 +27,8 @@ public class Vertrag {
 
     private String policennummer;
 
+    private String versicherteperson;
+
     @JsonIgnore
     @ManyToOne
     private Person person;
@@ -140,4 +142,11 @@ public class Vertrag {
         return Objects.hash(id);
     }
 
+    public String getVersicherteperson() {
+        return versicherteperson;
+    }
+
+    public void setVersicherteperson(String versicherteperson) {
+        this.versicherteperson = versicherteperson;
+    }
 }
