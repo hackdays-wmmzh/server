@@ -63,6 +63,7 @@ public class ImageServiceImpl implements ImageService {
 
     private void checkForCatTag(Image image) throws IOException {
         List<String> imageTags = imaggaClient.getImageInfo(image.getContent());
+        System.out.println(String.join(", ", imageTags));
         for (String imageTag : imageTags) {
             if (catTags.contains(imageTag.toLowerCase())) {
                 String errorMessage = "Only pictures of documents allowed! Image was probably a cat or: " + String.join(", ", imageTags);
@@ -73,6 +74,7 @@ public class ImageServiceImpl implements ImageService {
 
     private void checkForAllowedImageTag(Image image) throws IOException {
         List<String> imageTags = imaggaClient.getImageInfo(image.getContent());
+        System.out.println(String.join(", ", imageTags));
         for (String imageTag : imageTags) {
             if (allowedTags.contains(imageTag.toLowerCase())) {
                 return;
