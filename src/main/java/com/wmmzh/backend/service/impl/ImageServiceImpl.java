@@ -11,6 +11,7 @@ import com.wmmzh.backend.service.EreignisService;
 import com.wmmzh.backend.service.ImageService;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -37,6 +38,7 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
+    @Transactional
     public void add(long personId, Image image) {
         Person person = personRepo.getById(personId).orElseThrow(() -> new IllegalArgumentException("Person '" + personId + "' does not exist!"));
         Image savedImage = imageRepo.save(image);
