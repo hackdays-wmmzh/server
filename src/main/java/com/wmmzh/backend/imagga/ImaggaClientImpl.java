@@ -38,7 +38,7 @@ public class ImaggaClientImpl implements ImaggaClient {
         ImaggaModel imaggaModel =  gson.fromJson(response.getBody().toString(), ImaggaModel.class);
 
         return imaggaModel.getResult().getTags().stream()
-                .sorted(Comparator.comparing(ImaggaModel.Tag::getConfidence))
+                .sorted(Comparator.comparing(ImaggaModel.Tag::getConfidence).reversed())
                 .limit(5)
                 .map(t -> t.getTag().getDe())
                 .collect(Collectors.toList());
