@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -22,7 +24,7 @@ public class Ereignis {
     private Long id;
 
     @JsonIgnore
-    @OneToOne
+    @ManyToOne
     private Person person;
 
     @JsonFormat(pattern = "dd.MM.yyyy HH:mm")

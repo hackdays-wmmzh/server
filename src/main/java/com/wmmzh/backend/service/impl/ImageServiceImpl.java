@@ -9,7 +9,6 @@ import com.wmmzh.backend.repository.ImageRepository;
 import com.wmmzh.backend.repository.PersonRepository;
 import com.wmmzh.backend.service.EreignisService;
 import com.wmmzh.backend.service.ImageService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -26,7 +25,7 @@ public class ImageServiceImpl implements ImageService {
 
     private static final List<String> allowedTags = Arrays.asList(
         "papier", "dokument", "rechung", "text", "buch", "schreiben", "währung", "gewinn", "text",
-        "finanzelles", "markt"
+        "finanzelles", "markt", "textmaker", "erfolg", "grafik", "retro"
     );
 
     public ImageServiceImpl(ImaggaClient imaggaClient, OcrClient ocrClient, PersonRepository personRepo, ImageRepository imageRepo, EreignisService ereignisService) {
@@ -49,6 +48,7 @@ public class ImageServiceImpl implements ImageService {
             throw new RuntimeException(e);
         }
 
+
         imageRepo.save(image);
     }
 
@@ -61,6 +61,11 @@ public class ImageServiceImpl implements ImageService {
         }
 
         throw new IllegalStateException("Only pictures of documents allowed! Image was one of the following: " + String.join(", ", imageTags));
+    }
+
+    @Override
+    public List<Image> getAll() {
+        return imageRepo.findAll();
     }
 
     @Override

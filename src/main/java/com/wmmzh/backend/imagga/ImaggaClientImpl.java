@@ -5,7 +5,6 @@ import kong.unirest.HttpResponse;
 import kong.unirest.JsonNode;
 import kong.unirest.Unirest;
 import org.springframework.stereotype.Service;
-
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Collections;
