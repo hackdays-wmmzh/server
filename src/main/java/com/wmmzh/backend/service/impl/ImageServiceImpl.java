@@ -27,7 +27,11 @@ public class ImageServiceImpl implements ImageService {
     private static final List<String> allowedTags = Arrays.asList(
             "papier", "dokument", "rechung", "text", "buch", "schreiben", "währung", "gewinn", "text",
             "finanzelles", "markt", "textmaker", "erfolg", "grafik", "retro", "linien", "block", "kreative",
-            "geschäft", "maschine", "schule", "digital", "dokuments"
+            "geschäft", "maschine", "schule", "digital", "dokuments", "im menü", "hinweis"
+    );
+
+    private static final List<String> catTags = Arrays.asList(
+            "katze", "tabby", "tier"
     );
 
     public ImageServiceImpl(ImaggaClient imaggaClient, OcrClient ocrClient, PersonRepository personRepo, ImageRepository imageRepo, EreignisService ereignisService) {
@@ -46,7 +50,8 @@ public class ImageServiceImpl implements ImageService {
         ereignisService.createEreignis(person, Ereignis.Type.RECHNUNG, "Rechnung eingereicht", savedImage);
 
         try {
-            isImageTagAllowed(image);
+            checkForCatTag(image);
+            checkForAllowedImageTag(image);
         } catch (IOException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
@@ -56,7 +61,17 @@ public class ImageServiceImpl implements ImageService {
         imageRepo.save(image);
     }
 
-    private void isImageTagAllowed(Image image) throws IOException {
+    private void checkForCatTag(Image image) throws IOException {
+        List<String> imageTags = imaggaClient.getImageInfo(image.getContent());
+        for (String imageTag : imageTags) {
+            if (catTags.contains(imageTag.toLowerCase())) {
+                String errorMessage = "Only pictures of documents allowed! Image was probably a cat or: " + String.join(", ", imageTags);
+                throw new IllegalStateException(errorMessage);
+            }
+        }
+    }
+
+    private void checkForAllowedImageTag(Image image) throws IOException {
         List<String> imageTags = imaggaClient.getImageInfo(image.getContent());
         for (String imageTag : imageTags) {
             if (allowedTags.contains(imageTag.toLowerCase())) {
@@ -65,8 +80,6 @@ public class ImageServiceImpl implements ImageService {
         }
 
         String errorMessage = "Only pictures of documents allowed! Image was one of the following: " + String.join(", ", imageTags);
-        System.err.println(errorMessage);
-        System.out.println(errorMessage);
         throw new IllegalStateException(errorMessage);
     }
 
