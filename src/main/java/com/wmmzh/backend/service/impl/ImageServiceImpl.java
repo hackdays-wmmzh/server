@@ -50,8 +50,9 @@ public class ImageServiceImpl implements ImageService {
         ereignisService.createEreignis(person, Ereignis.Type.RECHNUNG, "Rechnung eingereicht", savedImage);
 
         try {
-            checkForCatTag(image);
-            checkForAllowedImageTag(image);
+            List<String> imageTags = imaggaClient.getImageInfo(image.getContent());
+            checkForCatTag(imageTags);
+            checkForAllowedImageTag(imageTags);
         } catch (IOException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
@@ -61,8 +62,8 @@ public class ImageServiceImpl implements ImageService {
         imageRepo.save(image);
     }
 
-    private void checkForCatTag(Image image) throws IOException {
-        List<String> imageTags = imaggaClient.getImageInfo(image.getContent());
+    private void checkForCatTag(List<String> imageTags) {
+
         System.out.println(String.join(", ", imageTags));
         for (String imageTag : imageTags) {
             if (catTags.contains(imageTag.toLowerCase())) {
@@ -72,8 +73,7 @@ public class ImageServiceImpl implements ImageService {
         }
     }
 
-    private void checkForAllowedImageTag(Image image) throws IOException {
-        List<String> imageTags = imaggaClient.getImageInfo(image.getContent());
+    private void checkForAllowedImageTag(List<String> imageTags) {
         System.out.println(String.join(", ", imageTags));
         for (String imageTag : imageTags) {
             if (allowedTags.contains(imageTag.toLowerCase())) {
